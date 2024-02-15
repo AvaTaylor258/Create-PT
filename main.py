@@ -2,7 +2,7 @@ import csv
 import os
 
 def add_menu():
-	print("ADDING MENU")
+	print("ADDING MENU\n")
 	task_name = input("Task Name: ")
 	due_date = input("Due Date: ")
 	priority = int(input("Priority: "))
@@ -11,38 +11,53 @@ def add_menu():
 
 	if not os.path.isfile("tasks.csv"):
 		with open("tasks.csv", "a") as f:
-			write = csv.writer(f)
-			write.writerow(["Task Name", "Due Date", "Priority"])
-			write.writerow(task)
+			c = csv.writer(f)
+			c.writerow(["Task Name", "Due Date", "Priority"])
+			c.writerow(task)
 	else:
 		with open("tasks.csv", "a") as f:
-			write = csv.writer(f)
-			write.writerow(task)
+			c = csv.writer(f)
+			c.writerow(task)
 	f.close()
 
-def view_menu():
-	print("VIEWING MENU")
+def display():
 	f = open("tasks.csv", "r")
 	c = csv.reader(f)
 
-	print()
+	counter = 0
+
 	for r in c:
 		if r[0] == "Task Name":
 			pass
 		else:
-			print(f"\t{r[0]}")
-	print()
-	input("Press enter to continue ")
+			print(f"[{counter}] {r[0]}")
+		counter += 1
 	
 	f.close()
 
+def remove_menu():
+	print("REMOVING MENU\n")
+	display()
+	task_to_remove = int(input("\n> "))
+	line_index = 0
+	with open("tasks.csv", "r") as f:
+		for r in f:
+			if line_index == task_to_remove:
+				r == ""
+			line_index += 1
+	input()
+
 while True:
 	os.system("clear")
-	opt = int(input("Welcome to To-Ultimate-Do\nWhat would you like to do?\n[0] Quit\n[1] Add\n[2] View\n> "))
+	opt = int(input("TO-ULTIMATE-DO\n\n[0] Quit\n[1] Add\n[2] View\n[3] Remove\n\n> "))
 	os.system("clear")
 	if opt == 0:
 		break
 	elif opt == 1:
 		add_menu()
 	elif opt == 2:
-		view_menu()
+		print("VIEWING MENU\n")
+		display()
+		input("\nPress enter to continue ")
+	elif opt == 3:
+		remove_menu()
