@@ -35,21 +35,9 @@ def display():
 	
 	f.close()
 
-def remove_menu():
-	print("REMOVING MENU\n")
-	display()
-	task_to_remove = int(input("\n> "))
-	line_index = 0
-	with open("tasks.csv", "r") as f:
-		for r in f:
-			if line_index == task_to_remove:
-				r == ""
-			line_index += 1
-	input()
-
 while True:
 	os.system("clear")
-	opt = int(input("TO-ULTIMATE-DO\n\n[0] Quit\n[1] Add\n[2] View\n[3] Remove\n\n> "))
+	opt = int(input("TO-ULTIMATE-DO\n\n[0] Quit\n[1] Add\n[2] View\n\n> "))
 	os.system("clear")
 	if opt == 0:
 		break
@@ -59,5 +47,3 @@ while True:
 		print("VIEWING MENU\n")
 		display()
 		input("\nPress enter to continue ")
-	elif opt == 3:
-		remove_menu()
